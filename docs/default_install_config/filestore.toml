@@ -1,0 +1,13 @@
+[data]
+
+### example data start #####
+
+mysql_host = "192.168.100.188"
+mysql_port = 3307
+mysql_db = "test"
+
+redis_host = "192.168.100.185"
+redis_port = 6379
+redis_db = 1
+
+### example data end #####

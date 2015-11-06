@@ -1,0 +1,5 @@
+bin/
+pkg/
+confd
+release
+release.tar.gz

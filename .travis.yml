@@ -1,0 +1,11 @@
+language: go
+go:
+  - 1.4
+services:
+  - redis
+before_install:
+
+install:
+
+script:
+  - ./test

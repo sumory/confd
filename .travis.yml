@@ -2,6 +2,8 @@ language: go
 go:
   - 1.4
 
+sudo: required
+
 script:
   - ./build.sh
   - ./docs/install.sh

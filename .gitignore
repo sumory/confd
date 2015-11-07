@@ -2,3 +2,4 @@ bin/
 pkg/
 release
 release.tar.gz
+confd

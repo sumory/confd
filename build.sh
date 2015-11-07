@@ -6,8 +6,8 @@
 # sh build.sh darwin(或linux), 构建指定平台的64为程序
 
 # examples:
-# sh build.sh darwin dev 构建MacOS版本的dev环境程序
-# sh build.sh linux prod 构建linux版本的prod环境程序
+# sh build.sh darwin 构建MacOS版本的程序
+# sh build.sh linux 构建linux版本的程序
 #####################################################################
 
 source /etc/profile

@@ -10,7 +10,6 @@ import (
 type Cli interface {
 	GetAll() (map[string]interface{}, error)
 	GetValues(keys []string) (map[string]interface{}, error)
-	SetValues(values map[string]interface{}) error
 	GetValue(key string) (interface{}, error)
 	SetValue(key string, value interface{}) error
 	DeleteKey(key string) error

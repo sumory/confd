@@ -70,10 +70,10 @@ func (c *Cli) DeleteKey(key string)  error {
 	}
 
 	delete(c.FileStore.Data,key)
-	return c.SetValues(c.FileStore.Data)
+	return c.setValues(c.FileStore.Data)
 }
 
-func (c *Cli) SetValues(values map[string]interface{}) error {
+func (c *Cli) setValues(values map[string]interface{}) error {
 
 	filename := c.FileStore.Path
 
@@ -105,5 +105,5 @@ func (c *Cli) SetValue(key string, value interface{}) error {
 	}
 
 	c.FileStore.Data[key] = value
-	return c.SetValues(c.FileStore.Data)
+	return c.setValues(c.FileStore.Data)
 }

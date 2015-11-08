@@ -29,7 +29,10 @@ export GOARCH=amd64
 
 flags="-X main.buildstamp `date -u '+%Y-%m-%d_%I:%M:%S%p'` -X main.githash `git rev-parse HEAD`"
 echo ${flags}
-go build -ldflags "$flags" -x -o docs/default_install_config/confd confd.go
+go build -ldflags "$flags" -x -o confd confd.go
+go build -ldflags "$flags" -x -o confd-cli confd_cli.go
 
+cp confd docs/default_install_config/
+cp confd-cli docs/default_install_config/
 
 echo "finish building with GOOS: "${OS}

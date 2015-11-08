@@ -8,11 +8,15 @@ import (
 )
 
 type Cli interface {
+	GetAll() (map[string]interface{}, error)
 	GetValues(keys []string) (map[string]interface{}, error)
 	SetValues(values map[string]interface{}) error
+	GetValue(key string) (interface{}, error)
+	SetValue(key string, value interface{}) error
+	DeleteKey(key string) error
 }
 
-func New(c *CliConfig) (Cli, error) {
+func New(c *CliConfig) (error,Cli) {
 	if c.Store == "" {
 		c.Store = "file" //default cli
 	}
@@ -27,5 +31,5 @@ func New(c *CliConfig) (Cli, error) {
 		return file.NewFileCli(connectAddr)
 	}
 
-	return nil, errors.New("Invalid cli...")
+	return  errors.New("Invalid cli..."),nil
 }

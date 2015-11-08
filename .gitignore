@@ -3,3 +3,4 @@ pkg/
 release
 release.tar.gz
 confd
+confd-cli

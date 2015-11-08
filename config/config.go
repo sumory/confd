@@ -13,6 +13,7 @@ import (
 	"fmt"
 )
 
+
 var (
 	configFile = ""
 	defaultConfigFile = "/data/confd/data/config.toml"
@@ -28,22 +29,19 @@ type Config struct {
 	Store       string `toml:"store"`
 	ConnectAddr string `toml:"connect_addr"`
 
-	ConfDir     string `toml:"confdir"` //confd模板文件、meta文件目录
+	ConfDir     string `toml:"confdir"` //confd配置文件、模板文件、meta文件目录
 
 	Interval    int    `toml:"interval"`
 	Debug       bool
 }
 
 
-
-
-
 func init() {
-	flag.StringVar(&storeType, "store-type", "redis", "backend to use")
+	flag.StringVar(&storeType, "store-type", "file", "backend store to use")
 	flag.StringVar(&confDir, "confdir", "/data/confd", "confd conf directory")
 	flag.StringVar(&configFile, "config-file", "", "the confd config file")
+	flag.StringVar(&connectAddr, "connect-addr", "", "backend store address")
 	flag.IntVar(&interval, "interval", 600, "backend polling interval")
-	flag.StringVar(&connectAddr, "connect-addr", "", "list of backend nodes")
 	flag.BoolVar(&debug, "debug", false, "debug mode")
 }
 
@@ -56,7 +54,7 @@ func InitConfig() (error, *Config, *processor.TemplateConfig, *store.StoreConfig
 
 	// 默认配置
 	config := Config{
-		Store:    "redis",
+		Store:    "file",
 		ConfDir:  "/data/confd",
 		Interval: 600,
 	}

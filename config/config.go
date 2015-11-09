@@ -14,6 +14,7 @@ import (
 )
 
 
+
 var (
 	configFile = ""
 	defaultConfigFile = "/data/confd/data/config.toml"
@@ -45,19 +46,34 @@ func init() {
 	flag.BoolVar(&debug, "debug", false, "debug mode")
 }
 
-func InitConfig() (error, *Config, *processor.TemplateConfig, *store.StoreConfig) {
-	if configFile == "" {
-		if _, err := os.Stat(defaultConfigFile); !os.IsNotExist(err) {
-			configFile = defaultConfigFile
-		}
-	}
-
+func InitConfig(configDirFromBuild string) (error, *Config, *processor.TemplateConfig, *store.StoreConfig) {
 	// 默认配置
 	config := Config{
 		Store:    "file",
 		ConfDir:  "/data/confd",
 		Interval: 600,
 	}
+
+	if configDirFromBuild != "" {//尝试使用build脚本的变量初始化configFile
+		fmt.Printf("configDirFromBuild:%s\n",configDirFromBuild)
+		configFileFromBuild := fmt.Sprintf("%s/data/config.toml", configDirFromBuild)
+		fmt.Printf("use config file[%s] from build script\n", configFileFromBuild)
+		if _, err := os.Stat(configFileFromBuild); !os.IsNotExist(err) {
+			configFile = configFileFromBuild
+			config.ConfDir = configDirFromBuild
+		}else {
+			fmt.Printf("use config file[%s] from build script error, file not exist, skip...\n", configFileFromBuild)
+		}
+	}
+
+	if configFile == "" {
+		if _, err := os.Stat(defaultConfigFile); !os.IsNotExist(err) {
+			fmt.Printf("use defaultConfigFile[%s]\n", defaultConfigFile)
+			configFile = defaultConfigFile
+		}
+	}
+
+
 
 	//从toml文件更新配置
 	if configFile == "" {

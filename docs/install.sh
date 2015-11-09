@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
 
-DEFAULT_PATH=/data/confd
+#confd config dir
+DEFAULT_PATH="$1"
+
+if [ -n "$DEFAULT_PATH" ];then
+   echo "use defined config dir: "${DEFAULT_PATH}
+else
+   echo "use default config dir: /data/confd"
+   DEFAULT_PATH=/data/confd
+fi
+
 mkdir -p $DEFAULT_PATH
+
+#make a backup for the last configurations
+CURRENT_TIME=$(date +%Y%m%d-%H%M%S)
+tar zcvf $DEFAULT_PATH".${CURRENT_TIME}.tar.gz" $DEFAULT_PATH
+rm -rf $DEFAULT_PATH/*
+
+
 echo "Install confd in default path: $DEFAULT_PATH"
 
 mkdir -p $DEFAULT_PATH/data
@@ -16,6 +32,7 @@ cp ./default_install_config/example_2.toml $DEFAULT_PATH/meta/
 cp ./default_install_config/example.tmpl $DEFAULT_PATH/templates/
 
 cp ./default_install_config/confd $DEFAULT_PATH/
+cp ./default_install_config/confd-cli $DEFAULT_PATH/
 
 echo "Installed confd"
 echo "By default, confd uses a file store, you also can choose redis or zookeeper"

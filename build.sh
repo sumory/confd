@@ -14,6 +14,9 @@ source /etc/profile
 
 OS="$1"
 
+#手动设置的默认的confd的配置文件路径
+configDirFromBuild="$2"
+
 if [ -n "$OS" ];then
    echo "use defined GOOS: "${OS}
 else
@@ -21,18 +24,29 @@ else
    OS=linux
 fi
 
+if [ -n "$configDirFromBuild" ];then
+   echo "use defined configDirFromBuild: "${configDirFromBuild}
+else
+   echo "use default configDirFromBuild: linux"
+   configDirFromBuild=""
+fi
+
 echo "start building with GOOS: "${OS}
 
 export GOOS=${OS}
 export GOARCH=amd64
 
-
-flags="-X main.buildstamp `date -u '+%Y-%m-%d_%I:%M:%S%p'` -X main.githash `git rev-parse HEAD`"
-echo ${flags}
-go build -ldflags "$flags" -x -o confd confd.go
-go build -ldflags "$flags" -x -o confd-cli confd_cli.go
+if [ "$configDirFromBuild" != "" ];then
+    flags="-X main.configDirFromBuild $configDirFromBuild"
+    echo ${flags}
+    go build -ldflags "$flags" -x -o confd confd.go
+    go build -ldflags "$flags" -x -o confd-cli confd_cli.go
+else
+    go build -x -o confd confd.go
+    go build -x -o confd-cli confd_cli.go
+fi
 
 cp confd docs/default_install_config/
 cp confd-cli docs/default_install_config/
 
-echo "finish building with GOOS: "${OS}
+echo "finish building with GOOS: "${OS}" "${configDirFromBuild}

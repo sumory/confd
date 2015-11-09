@@ -5,5 +5,3 @@ go:
 sudo: required
 
 script:
-  - ./build.sh
-  - ./docs/install.sh

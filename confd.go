@@ -12,6 +12,7 @@ import (
 	"syscall"
 )
 
+
 func init() {
 	log.SetFormatter(&log.TextFormatter{
 		ForceColors:     false,
@@ -21,10 +22,12 @@ func init() {
 	log.SetLevel(log.DebugLevel)
 }
 
+var configDirFromBuild string = ""
+
 func main() {
 	flag.Parse()
 
-	err, myConfig, templateConfig, storeConfig := config.InitConfig()
+	err, myConfig, templateConfig, storeConfig := config.InitConfig(configDirFromBuild)
 	if err != nil {
 		log.Error(err.Error())
 	}

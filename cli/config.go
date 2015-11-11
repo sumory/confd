@@ -1,6 +1,6 @@
 package cli
 
 type CliConfig struct {
-	Store string
+	Store       string
 	ConnectAddr string
 }

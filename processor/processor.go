@@ -1,9 +1,9 @@
 package processor
 
 import (
+	log "github.com/Sirupsen/logrus"
 	"github.com/sumory/confd/utils"
 	"time"
-	log "github.com/Sirupsen/logrus"
 )
 
 type Processor interface {
@@ -80,4 +80,3 @@ func getMetaObjects(config *TemplateConfig) ([]*MetaObject, error) {
 	}
 	return metaObjects, lastError
 }
-

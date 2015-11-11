@@ -32,7 +32,7 @@ func main() {
 			//Flags:   app.Flags,
 			Action: func(c *cli.Context) {
 				for i, k := range c.GlobalFlagNames() {
-					fmt.Printf("%d %s:%v\n", i, k,c.GlobalString(k))
+					fmt.Printf("%d %s:%v\n", i, k, c.GlobalString(k))
 				}
 				println("set k/v: ", c.Args().Get(0), c.Args().Get(1))
 			},

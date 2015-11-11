@@ -88,7 +88,7 @@ func parseArgs() {
 	app.Run(os.Args)
 }
 
-func printGlobalOptions(c *cli.Context){
+func printGlobalOptions(c *cli.Context) {
 	fmt.Println("\nThe input flag args is:")
 
 	for i, k := range c.GlobalFlagNames() {
@@ -96,12 +96,12 @@ func printGlobalOptions(c *cli.Context){
 	}
 }
 
-func printCliConfig(cliConfig *mycli.CliConfig){
+func printCliConfig(cliConfig *mycli.CliConfig) {
 	fmt.Println("\nThe cliConfig is:")
 	fmt.Printf("%+v\n\n", *cliConfig)
 }
 
-func newMyCli(c *cli.Context)(error, mycli.Cli){
+func newMyCli(c *cli.Context) (error, mycli.Cli) {
 	log.SetLevel(log.WarnLevel)
 	printGlobalOptions(c)
 
@@ -112,26 +112,26 @@ func newMyCli(c *cli.Context)(error, mycli.Cli){
 	return mycli.New(cliConfig)
 }
 
-func getall(c *cli.Context){
+func getall(c *cli.Context) {
 	err, mycli := newMyCli(c)
 	if err != nil {
 		log.Error("New confd cli error: ", err.Error())
 	}
 
 	data, err := mycli.GetAll()
-	if err!=nil{
+	if err != nil {
 		fmt.Println("error when get all key/value")
 		return
 	}
 
 	fmt.Println("The stored k/v:")
 
-	for k,v:=range data{
-		fmt.Printf("%s\t %v \n", k,v)
+	for k, v := range data {
+		fmt.Printf("%s\t %v \n", k, v)
 	}
 }
 
-func get(c *cli.Context){
+func get(c *cli.Context) {
 	err, mycli := newMyCli(c)
 	if err != nil {
 		log.Error("New confd cli error: ", err.Error())
@@ -139,44 +139,43 @@ func get(c *cli.Context){
 
 	key := c.Args().Get(0)
 	data, err := mycli.GetValue(key)
-	if err!=nil{
-		fmt.Printf("\nerror when get key[%s], error: %v\n", key,err)
+	if err != nil {
+		fmt.Printf("\nerror when get key[%s], error: %v\n", key, err)
 		return
 	}
 
-	fmt.Printf("The value of key[%s] is: %v\n",key, data)
-
+	fmt.Printf("The value of key[%s] is: %v\n", key, data)
 
 }
 
 //confd-cli set key value
-func set(c *cli.Context){
+func set(c *cli.Context) {
 	err, mycli := newMyCli(c)
 	if err != nil {
 		log.Error("New confd cli error: ", err.Error())
 	}
 
-	key,value:=c.Args().Get(0), c.Args().Get(1)
-	err = mycli.SetValue(key,value)
-	if err!=nil{
+	key, value := c.Args().Get(0), c.Args().Get(1)
+	err = mycli.SetValue(key, value)
+	if err != nil {
 		fmt.Printf("set error: %s", err)
-	}else{
+	} else {
 		fmt.Println("set ok.")
 	}
 
 }
 
-func delete(c *cli.Context){
+func delete(c *cli.Context) {
 	err, mycli := newMyCli(c)
 	if err != nil {
 		log.Error("New confd cli error: ", err.Error())
 	}
 
-	key:=c.Args().Get(0)
+	key := c.Args().Get(0)
 	err = mycli.DeleteKey(key)
-	if err!=nil{
+	if err != nil {
 		fmt.Printf("delete key error: %s", err)
-	}else{
+	} else {
 		fmt.Println("delete ok.")
 	}
 

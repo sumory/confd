@@ -63,13 +63,13 @@ func (c *Cli) GetValue(key string) (interface{}, error) {
 	return nil, EmptyErr
 }
 
-func (c *Cli) DeleteKey(key string)  error {
+func (c *Cli) DeleteKey(key string) error {
 	err := c.Fetch()
 	if err != nil {
 		return err
 	}
 
-	delete(c.FileStore.Data,key)
+	delete(c.FileStore.Data, key)
 	return c.setValues(c.FileStore.Data)
 }
 

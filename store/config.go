@@ -1,6 +1,6 @@
 package store
 
 type StoreConfig struct {
-	Store string
+	Store       string
 	ConnectAddr string
 }

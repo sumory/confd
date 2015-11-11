@@ -5,3 +5,5 @@ go:
 sudo: required
 
 script:
+  - go test ./cli
+  - go test ./store

@@ -3,8 +3,8 @@ package file
 import (
 	"strings"
 
-	"github.com/BurntSushi/toml"
 	"fmt"
+	"github.com/BurntSushi/toml"
 )
 
 type FileStore struct {
@@ -25,7 +25,7 @@ func NewFileClient(filePath string) (*Client, error) {
 	}
 
 	return &Client{
-		FileStore:fileStore,
+		FileStore: fileStore,
 	}, nil
 }
 
@@ -34,7 +34,7 @@ func (c *Client) GetValues(keys []string) (map[string]interface{}, error) {
 	for _, key := range keys {
 		key = strings.Trim(key, " ")
 		value, ok := c.FileStore.Data[key]
-		if ok{
+		if ok {
 			vars[key] = value
 			continue
 		}

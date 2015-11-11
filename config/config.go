@@ -6,23 +6,21 @@ import (
 	"os"
 	"path/filepath"
 
+	"fmt"
 	"github.com/BurntSushi/toml"
 	log "github.com/Sirupsen/logrus"
-	"github.com/sumory/confd/store"
 	"github.com/sumory/confd/processor"
-	"fmt"
+	"github.com/sumory/confd/store"
 )
 
-
-
 var (
-	configFile = ""
+	configFile        = ""
 	defaultConfigFile = "/data/confd/data/config.toml"
-	storeType string
-	connectAddr string
-	confDir string
-	interval int
-	debug bool
+	storeType         string
+	connectAddr       string
+	confDir           string
+	interval          int
+	debug             bool
 )
 
 //confd
@@ -30,12 +28,11 @@ type Config struct {
 	Store       string `toml:"store"`
 	ConnectAddr string `toml:"connect_addr"`
 
-	ConfDir     string `toml:"confdir"` //confd配置文件、模板文件、meta文件目录
+	ConfDir string `toml:"confdir"` //confd配置文件、模板文件、meta文件目录
 
-	Interval    int    `toml:"interval"`
-	Debug       bool
+	Interval int `toml:"interval"`
+	Debug    bool
 }
-
 
 func init() {
 	flag.StringVar(&storeType, "store-type", "file", "backend store to use")
@@ -54,14 +51,14 @@ func InitConfig(configDirFromBuild string) (error, *Config, *processor.TemplateC
 		Interval: 600,
 	}
 
-	if configDirFromBuild != "" {//尝试使用build脚本的变量初始化configFile
-		fmt.Printf("configDirFromBuild:%s\n",configDirFromBuild)
+	if configDirFromBuild != "" { //尝试使用build脚本的变量初始化configFile
+		fmt.Printf("configDirFromBuild:%s\n", configDirFromBuild)
 		configFileFromBuild := fmt.Sprintf("%s/data/config.toml", configDirFromBuild)
 		fmt.Printf("use config file[%s] from build script\n", configFileFromBuild)
 		if _, err := os.Stat(configFileFromBuild); !os.IsNotExist(err) {
 			configFile = configFileFromBuild
 			config.ConfDir = configDirFromBuild
-		}else {
+		} else {
 			fmt.Printf("use config file[%s] from build script error, file not exist, skip...\n", configFileFromBuild)
 		}
 	}
@@ -72,8 +69,6 @@ func InitConfig(configDirFromBuild string) (error, *Config, *processor.TemplateC
 			configFile = defaultConfigFile
 		}
 	}
-
-
 
 	//从toml文件更新配置
 	if configFile == "" {
@@ -108,13 +103,13 @@ func InitConfig(configDirFromBuild string) (error, *Config, *processor.TemplateC
 
 	//后端client设置
 	storeConfig := store.StoreConfig{
-		Store:config.Store,
-		ConnectAddr:config.ConnectAddr,
+		Store:       config.Store,
+		ConnectAddr: config.ConnectAddr,
 	}
 	// 模板设置BT
 	templateConfig := processor.TemplateConfig{
 		ConfDir:     config.ConfDir,
-		MetaDir:   filepath.Join(config.ConfDir, "meta"),
+		MetaDir:     filepath.Join(config.ConfDir, "meta"),
 		TemplateDir: filepath.Join(config.ConfDir, "templates"),
 	}
 

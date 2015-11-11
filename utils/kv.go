@@ -17,7 +17,7 @@ func NewKVStore() KVStore {
 	s := KVStore{data: make(map[string]interface{})}
 	s.FuncMap = map[string]interface{}{
 		"exists": s.Exists,
-		"get": s.Get,
+		"get":    s.Get,
 	}
 	return s
 }
@@ -45,7 +45,6 @@ func (s KVStore) Get(key string) (interface{}, error) {
 	}
 	return v, nil
 }
-
 
 func (s KVStore) Set(key string, value interface{}) {
 	s.Lock()

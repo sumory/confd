@@ -3,8 +3,8 @@ package cli
 import (
 	"errors"
 	"github.com/sumory/confd/cli/file"
-//	"github.com/sumory/confd/cli/redis"
-//	"github.com/sumory/confd/cli/zookeeper"
+	//	"github.com/sumory/confd/cli/redis"
+	//	"github.com/sumory/confd/cli/zookeeper"
 )
 
 type Cli interface {

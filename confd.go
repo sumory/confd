@@ -5,13 +5,12 @@ import (
 	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/sumory/confd/config"
-	"github.com/sumory/confd/store"
 	"github.com/sumory/confd/processor"
+	"github.com/sumory/confd/store"
 	"os"
 	"os/signal"
 	"syscall"
 )
-
 
 func init() {
 	log.SetFormatter(&log.TextFormatter{

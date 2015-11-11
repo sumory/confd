@@ -21,9 +21,9 @@ type MetaConfig struct {
 }
 
 type MetaObject struct {
-	Tmpl        string //模板文件，用于生成最后的配置文件
-	Dest        string //最终配置文件的路径
-	Keys        []string //需要使用的key
+	Tmpl string   //模板文件，用于生成最后的配置文件
+	Dest string   //最终配置文件的路径
+	Keys []string //需要使用的key
 
 	FileMode    os.FileMode
 	Mode        string
@@ -83,7 +83,6 @@ func (t *MetaObject) setVars() (map[string]interface{}, error) {
 	var err error
 	log.Debug("Retrieving keys from store")
 	result, err := t.storeClient.GetValues(t.Keys)
-
 
 	if err != nil {
 		return nil, err

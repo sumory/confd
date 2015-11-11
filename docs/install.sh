@@ -25,14 +25,14 @@ mkdir -p $DEFAULT_PATH/meta
 mkdir -p $DEFAULT_PATH/templates
 
 
-cp ./default_install_config/config.toml $DEFAULT_PATH/data/
-cp ./default_install_config/filestore.toml $DEFAULT_PATH/data/
-cp ./default_install_config/example_1.toml $DEFAULT_PATH/meta/
-cp ./default_install_config/example_2.toml $DEFAULT_PATH/meta/
-cp ./default_install_config/example.tmpl $DEFAULT_PATH/templates/
+cp ./files/config.toml $DEFAULT_PATH/data/
+cp ./files/filestore.toml $DEFAULT_PATH/data/
+cp ./files/example_1.toml $DEFAULT_PATH/meta/
+cp ./files/example_2.toml $DEFAULT_PATH/meta/
+cp ./files/example.tmpl $DEFAULT_PATH/templates/
 
-cp ./default_install_config/confd $DEFAULT_PATH/
-cp ./default_install_config/confd-cli $DEFAULT_PATH/
+cp ./files/confd $DEFAULT_PATH/
+cp ./files/confd-cli $DEFAULT_PATH/
 
 echo "Installed confd"
 echo "By default, confd uses a file store, you also can choose redis or zookeeper"

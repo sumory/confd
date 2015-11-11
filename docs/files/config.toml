@@ -1,0 +1,26 @@
+#数据存储方式，默认使用file，即使用filestore.toml里的数据
+Store = "file"
+#具体存储方式的地址
+ConnectAddr = "/data/confd/data/filestore.toml"
+#confd所有配置（程序配置、模板文件、meta文件）默认所在的文件夹
+ConfDir = "/data/confd"
+#非debug模式下，confd多久主动生成一次配置文件，单位为秒
+Interval = 600
+#是否debug，debug模式下运行confd之后推出，非debug将在后台运行
+Debug = true
+
+#### redis based #############################
+#Store = "redis"
+#ConnectAddr = "192.168.100.185:6379"
+#ConfDir = "/data/confd"
+#Interval = 600
+#Debug = false
+##############################################
+
+#### zookeeper based #########################
+#Store = "zookeeper"
+#ConnectAddr = "192.168.100.185:2181"
+#ConfDir = "/data/confd"
+#Interval = 600
+#Debug = false
+##############################################

@@ -3,8 +3,8 @@ package cli
 import (
 	"errors"
 	"github.com/sumory/confd/cli/file"
-	//	"github.com/sumory/confd/cli/redis"
-	//	"github.com/sumory/confd/cli/zookeeper"
+//	"github.com/sumory/confd/cli/redis"
+//	"github.com/sumory/confd/cli/zookeeper"
 )
 
 type Cli interface {
@@ -15,7 +15,7 @@ type Cli interface {
 	DeleteKey(key string) error
 }
 
-func New(c *CliConfig) (error,Cli) {
+func New(c *CliConfig) (error, Cli) {
 	if c.Store == "" {
 		c.Store = "file" //default cli
 	}
@@ -30,5 +30,5 @@ func New(c *CliConfig) (error,Cli) {
 		return file.NewFileCli(connectAddr)
 	}
 
-	return  errors.New("Invalid cli..."),nil
+	return errors.New("Invalid cli..."), nil
 }

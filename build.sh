@@ -46,7 +46,7 @@ else
     go build -x -o confd-cli confd_cli.go
 fi
 
-cp confd docs/default_install_config/
-cp confd-cli docs/default_install_config/
+cp confd docs/files/
+cp confd-cli docs/files/
 
 echo "finish building with GOOS: "${OS}" "${configDirFromBuild}

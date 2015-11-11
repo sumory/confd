@@ -1,5 +1,0 @@
-Store = "file"
-ConnectAddr = "/data/confd/data/filestore.toml"
-ConfDir = "/data/confd"
-Interval = 600
-Debug = true

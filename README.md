@@ -53,9 +53,9 @@ cd /data/server/confd
 
 - 首先了解：
     - confd的配置可参看[config.toml](./docs/files/config.toml), config.toml里的配置均可通过运行时指定flag来覆盖默认配置。
-    - confid.toml中指定的配置数据存储为“file”形式，即数据存储在同目录下filestore.toml文件中。
+    - confd.toml中指定的配置数据存储为“file”形式，即数据存储在同目录下filestore.toml文件中。
     - 根据需要编辑模板，参考[example.tmpl](docs/files/example.tmpl)，模板中使用的变量目前只支持k/v形式。
-    - 根据需要编辑meta文件，参考[example_1.toml](docs/files/example_1.toml)，meta文件制定了生成最终配置文件时需要的模板文件、数据、最终文件地址等。
+    - 根据需要编辑meta文件，参考[example_1.toml](docs/files/example_1.toml)，meta文件指定了生成最终配置文件时需要的模板文件、数据、最终文件地址等。
 - 命令
     - `./confd`, 在各个meta文件指定的目的地址生成了需要的配置文件
     - `./confd --debug=false`, 默认confd在后台运行，每10分钟重新生成一次全部的配置文件
